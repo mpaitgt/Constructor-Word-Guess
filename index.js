@@ -7,3 +7,9 @@
 // 3. `Letter.js` *should not* `require` any other files.
 
 // 4. `Word.js` *should only* require `Letter.js`
+
+var Letter = require("./letter.js");
+var letter = new Letter();
+var userInput = process.argv[2];
+
+letter.checkChar(userInput);
