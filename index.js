@@ -8,8 +8,36 @@
 
 // 4. `Word.js` *should only* require `Letter.js`
 
-var Letter = require("./letter.js");
-var letter = new Letter();
-var userInput = process.argv[2];
+var Word = require("./word.js");
+var inquirer = require('inquirer');
+var wordArray = ['parquet courts', 'mitski', 'tame impala'];
+var random = Math.floor(Math.random() * wordArray.length);
 
-letter.checkChar(userInput);
+var currentWord = new Word(wordArray[random]);
+var guesses = 10;
+
+function gamePlay() {
+    if (guesses > 0) {
+        console.log(`\n${currentWord.string()}\n`);
+        inquirer.prompt([
+            {
+                type: 'input',
+                message: 'Guess a letter: ',
+                name: 'letter'
+            }
+        ]).then(function(answer) {
+            currentWord.guess(answer['letter']);
+            console.log(`\n${currentWord.string()}\n`);
+            guesses--;
+            gamePlay();
+        })
+    } else {
+        console.log(`\nyou lost\n`);
+    }
+}
+
+
+gamePlay();
+
+
+
