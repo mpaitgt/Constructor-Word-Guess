@@ -17,8 +17,6 @@ var Letter = function(ltr) {
     this.check = function(c) {
         if (c === this.char) {
             this.guessed = true;
-        } else {
-            this.guessed = false;
         }
     }
 }
