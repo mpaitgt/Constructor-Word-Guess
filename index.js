@@ -1,13 +1,16 @@
 var Word = require("./word.js");
 var inquirer = require('inquirer');
-var wordArray = ['parquet courts', 'mitski', 'tame impala', 'sandy alex g', 'built to spill', 'elliott smith'];
+var wordArray = ['mitski', 'tame impala', 'elliott smith'];
 var guesses = 20;
 var random;
 var currentWord;
 
+// 'sandy alex g', 'built to spill'
+
 function gamePlay() {
     if (wordArray.length === 0) {
         console.log(`\nYOU GOT THROUGH THEM ALL! CONGRATULATIONS!`);
+        playAgain();
     }
     if (guesses > 0 && wordArray.length > 0) {
         console.log(`\nGuesses left: ${guesses}\n`);
@@ -51,7 +54,8 @@ function gamePlay() {
             pickWord();
             gamePlay();
         } else {
-            console.log('YOU COULDN\'T GET THROUGH WITHOUT A LOSS - SORRY');
+            console.log('YOU COULDN\'T GET THROUGH WITHOUT A LOSS - SORRY\n');
+            playAgain();
         }
 
     }
@@ -71,4 +75,21 @@ function pickWord() {
     currentWord = new Word(wordArray[random]);
 }
 
+function playAgain() {
+    inquirer.prompt([
+        {
+            type: 'confirm',
+            message: 'Play again?',
+            name: 'replay'
+        }
+    ]).then(function(answer) {
+        if (answer['replay'] === true) {
+            guesses = 20;
+            wordArray = ['mitski', 'tame impala', 'sandy alex g', 'built to spill', 'elliott smith'];
+            gamePlay();
+        }
+    })
+}
+
 gamePlay();
+

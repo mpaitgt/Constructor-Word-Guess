@@ -7,7 +7,7 @@ This is a command line game of hangman.
 In your terminal, play the computer in a game of hangman by guessing the letters. You have 20 guesses.
 
 ## Checkout Command-Line Hangman in action below:
-![](Media1.mp4)
+![](constructor-gif.gif)
 
 
 ## Technologies Used
